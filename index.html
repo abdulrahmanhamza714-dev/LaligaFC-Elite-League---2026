@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laliga FC Elite League</title>
+<style>
+   /* ===== RESPONSIVE FOUNDATION ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Prevent layout breaking */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Flexible containers */
+section {
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+button {
+    min-height: 45px;
+    padding: 12px 18px;
+    font-size: 16px;
+}
+
+select,
+input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+    .fixtures select {
+        width: 48%;
+    }
+}
+
+table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+h1 { font-size: clamp(22px, 4vw, 40px); }
+h2 { font-size: clamp(18px, 3vw, 28px); }
+p  { font-size: clamp(14px, 2vw, 18px); }
+
+@media (max-width: 480px) {
+
+    .hero {
+        height: 50vh;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    section {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .fixtures select {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .hero {
+        height: 65vh;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .hero {
+        height: 75vh;
+    }
+}
+
+
+
+
+.hero {
+    height: 60vh;
+    min-height: 350px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h1 {
+    font-size: clamp(24px, 5vw, 48px);
+}
+
+.hero p {
+    font-size: clamp(14px, 2.5vw, 20px);
+}
+
+
+body{font-family:sans-serif;padding:20px;}
+h2{margin-top:20px;}
+.matchday{margin-top:10px;}
+.fixture{margin-left:20px;}
+table{border-collapse:collapse;width:100%;margin-top:10px;}
+th,td{border:1px solid #333;padding:5px;text-align:center;}
+
+/* GLOBAL STYLING */
+body {
+    font-family: 'Arial Black', sans-serif;
+    background: linear-gradient(120deg, #0a0a0a, #0f0f3d);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3 { 
+    text-align: center; 
+    color: gold;
+    text-shadow: 2px 2px #000;
+}
+section { 
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 15px;
+    box-shadow: 0 0 30px gold;
+}
+
+/* HERO SECTION */
+
+.hero {
+    height: 420px;
+    background-color: #0b0f1a;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    position: relative;
+    transition: background-image 0.8s ease-in-out;
+}
+
+/* Dark overlay for readability */
+
+.hero-overlay {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.75)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Content */
+
+.hero-content {
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.hero-btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Primary */
+
+.hero-btn.primary {
+    background: linear-gradient(90deg, gold, orange);
+    color: black;
+    box-shadow: 0 0 15px gold;
+}
+
+.hero-btn.primary:hover {
+    transform: scale(1.05);
+}
+
+/* Secondary */
+
+.hero-btn.secondary {
+    border: 2px solid white;
+    color: white;
+}
+
+.hero-btn.secondary:hover {
+    background: white;
+    color: black;
+}
+
+
+/* REGISTERED PLAYERS */
+#playersList li{
+    padding: 5px 10px;
+    background: rgba(255, 215, 0, 0.2);
+    margin: 3px 0;
+    border-radius: 10px;
+    transition: transform 0.3s, background 0.3s;
+}
+#playersList li:hover{
+    transform: scale(1.1);
+    background: rgba(255, 215, 0, 0.5);
+}
+
+/* FIXTURES */
+.matchday { 
+    margin-top: 15px;
+    border-top: 2px solid gold;
+    padding-top: 10px;
+}
+.fixture {
+    padding: 8px;
+    margin: 5px 0;
+    border-left: 4px solid gold;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+.fixture:hover {
+    transform: scale(1.05);
+    background: rgba(255, 215, 0, 0.3);
+}
+
+/* LEAGUE TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px gold;
+    border-radius: 10px;
+    overflow: hidden;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ffd700;
+}
+th {
+    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    color: #000;
+    text-shadow: 1px 1px #333;
+}
+tr:nth-child(even) {
+    background: rgba(255, 215, 0, 0.1);
+}
+tr:hover {
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(1.02);
+}
+.match-results-home {
+    max-width: 600px;
+    margin: 30px auto;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px gold;
+    color: #fff;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.match-results-home h2 {
+    text-align: center;
+    color: gold;
+    text-shadow: 1px 1px #000;
+}
+
+#homeScorelineList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: rgba(255,215,0,0.1);
+    font-weight: bold;
+}
+.register-btn {
+    display: inline-block;
+    padding: 15px 35px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    border-radius: 12px;
+    box-shadow: 0 0 20px gold;
+    transition: 0.3s;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero .register-btn {
+    display: inline-block;
+    padding: 15px 35px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    border-radius: 12px;
+    box-shadow: 0 0 20px gold;
+    transition: 0.3s;
+}
+
+.hero .register-btn:hover {
+    background: linear-gradient(90deg, #ffd633, #ffb84d);
+    transform: scale(1.05);
+}
+
+
+/* Reuse your register button style */
+.hero .register-btn {
+    display: inline-block;
+    padding: 15px 35px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    border-radius: 12px;
+    box-shadow: 0 0 20px gold;
+    transition: 0.3s;
+}
+
+.hero .register-btn:hover {
+    background: linear-gradient(90deg, #ffd633, #ffb84d);
+    transform: scale(1.05);
+}
+
+.rules-prize {
+    max-width: 700px;
+    margin: 50px auto;
+    background: rgba(0,0,0,0.7);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px gold;
+    color: #fff;
+    text-align: center;
+}
+
+.rules-prize h2 {
+    font-size: 32px;
+    color: gold;
+    text-shadow: 2px 2px #000;
+    margin-bottom: 20px;
+}
+
+.rules-list {
+    list-style-type: disc;
+    margin: 0 auto 30px auto;
+    padding-left: 20px;
+    text-align: left;
+    font-size: 18px;
+}
+
+.rules-list li {
+    margin-bottom: 10px;
+}
+
+.prize {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.prize img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px gold;
+}
+
+.prize p {
+    font-size: 20px;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 1px 1px #000;
+}
+
+/* ===========================
+   Tournament Footer Styles
+   =========================== */
+.tournament-footer {
+    background: #111; /* Dark footer background */
+    color: white;
+    padding: 40px 20px 20px;
+    margin-top: 50px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    text-align: center;
+}
+
+.footer-brand h3 {
+    margin: 0;
+    color: #ff4b6e; /* Highlight color */
+    font-size: 1.5rem;
+}
+
+.footer-brand p {
+    margin-top: 5px;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.footer-links a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 6px 0;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: #ff4b6e;
+}
+
+.footer-contact p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.footer-social p {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #ff4b6e;
+}
+
+.footer-social a {
+    color: white;
+    text-decoration: none;
+    margin: 0 8px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.footer-social a:hover {
+    color: #ff4b6e;
+}
+
+/* ====== Sponsors Section ====== */
+.footer-sponsors {
+    margin-top: 10px;
+}
+
+.footer-sponsors p {
+    margin-bottom: 8px;
+    color: #ff4b6e;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.sponsor-logos {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+
+/* ===== Footer Bottom ===== */
+.footer-bottom {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* ===== Responsive Adjustments ===== */
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .hero {
+        height: 200px;
+    }
+
+    .hero h1 {
+        font-size: 1.5em;
+        padding: 5px;
+    }
+
+    .sponsor-item img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 150px;
+    }
+
+    .hero h1 {
+        font-size: 1.2em;
+    }
+
+    .sponsor-item img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+    .footer-brand h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-links a,
+    .footer-contact p,
+    .footer-social a {
+        font-size: 0.85rem;
+    }
+
+    .sponsor-list img,
+.sponsor-item img {
+    width: 400px;
+    height: 400px;
+    object-fit: contain; /* Keeps aspect ratio without stretching */
+    border-radius: 10px; /* optional, for rounded corners */
+}
+
+
+</style>
+
+</style>
+</head>
+<body>
+
+    <section id="heroSection" class="hero">
+
+    <div class="hero-overlay">
+        <div class="hero-content">
+
+            <h1>Laliga FC Elite League – SEASON 1</h1>
+            <p>Compete. Dominate. Become Legendary.</p>
+
+            <div class="hero-buttons">
+                <a href="./register.html" class="hero-btn primary">Register Now</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<section>
+<h2>Registered Players</h2>
+<ul id="playersList"></ul>
+</section>
+
+<section>
+<h2>League Table</h2>
+<table>
+<thead>
+<tr><th>Pos</th><th>Player</th><th>GP</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th></tr>
+</thead>
+<tbody id="leagueTableBody"></tbody>
+</table>
+</section>
+
+
+<section>
+<h2>Fixtures</h2>
+<div id="fixturesContainer"></div>
+</section>
+
+
+
+<section class="rules-prize">
+  <li>Each player can register only once.</li>
+    <li>Matches are played according to the tournament schedule.</li>
+    <li>Match results must be submitted by the admin.</li>
+    <li>Points are awarded as standard football rules (Win:3, Draw:1, Loss:0).</li>
+   lass="rules-list <li>Fair play is mandatory – any cheating results in disqualification.</li>
+  </ul><h2>Rules & Regulations</h2>
+
+    
+
+  <h2>Prize</h2>
+  <div class="prize">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEhUTEhMVFRUXFRUXFxcWFRcYFRUVFRUWFhUWFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAQGC4dHSAtMC0rLS0tLSstLS0tLS0rLS0uLS0tKy0tLS0tLS0tLS0tLi0tKy0tLS0tKy0tLS0rLf/AABEIAMkA+wMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAABAAIDBAUGBwj/xABLEAACAQIEAwUEBgMMCQUAAAABAgMAEQQSITEFQVEGEyJhcQcygZEUQqGxwfAjUtEIFyU1YnJzgpLC0uEVM1R0g5Oys/EWU2OFxP/EABkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBf/EACgRAQEAAgIBAwMDBQAAAAAAAAABAhEDITESQVEicfAEE2GBkcHh8f/aAAwDAQACEQMRAD8A8ttQFOogV20yAFOApyxk1J3ZpoR2p1qdahV0G2o2pwogU0G2pZafloEU0iMpTCtTWppFNG1crTctWCKGWppdoLUstTZaGWpo2hIoEVKRQIqaEdqFqktQppTLUiKeBTbVNIbSomrGHwE8il44ZXUbskTsot1ZVIFRVajSvRBoEaFEmlc0ApUb0s3pQEUAtEH0+VOzedvhRKtdzUilBbXbf0/OtRYvFAaDpesxpOd9zet2rGjJxFQLAdbjlflb7PlSTiRY6iw10Atb5cqyGagrnrQdRisZCwOU2sfXYbX/ABoLApGhN7A+WvKuajOt77/YetamBxoC2Fgbi58vL7/nTYuiGj3NWsO4cXBvqQDte1tQOlSGKt7ZqjkoZavNFTDHWoikRTStXTFTDHVFIrStVpo6iZKaEOWhapGWm2qaDCtNK1JTamlRlablqYikVrNhtARSIqQrTbVnSup9l/ZuPH49Y5ReKNGlkX9cKVVUPkWYE+Skc69ZHbN/F9EWJo1Z44Ye6Cs7RZlezpMcqKY3Yt3VsosLki/kHs/7Rrw/GrLJm7p0aKXLuqOQc4HMqyqetr21r3bhXCMJJGs0GKdksD3kci2YaaErsNLEb1jJY889rvCMLiMJFxXDKFZnVJhbKWzEp+kXlKkgCHnuDsKyOwPY7CNhJeI8SVzAukUaFg0hBys1kIZvEcqi41DHa1dL2xxMfEJYuD4KUy55++xMoIdYo01Kh9iQbHn4so56RdsPaW3DpxgeHxQmLDosbFwxs6j3FysPdFgT1v0qChFguAYthhcFgsQuIluEaUTqka6d5K15LHIpLW5nKOddDwrsb2ekxMuCTDySSYdV76QyS5AWAsGcOBnOugFhY7WrZ7FTY3GYU8Qk7kYmWJkw4AbuoYwxsSLsczOAzdQiDS1eY+0TsnguH4WJJSZ+IzszvKXfKBnzSSd3e2pIUXGtyeVFcp2ukwZxcowUYTDocieJmz5bhpLuSbE3t5AVj0rUQKqFQpGlQNSJ5GCoCx6dB51u4PstfWSS3kovr67ffXV8L4LHEigAA2BbqTbXWteTBADUbfs02rleS3w744SeXDt2ZgF9GOmxb77Vm4rgcX1cw+Nx9tdvPh1rKx0Cgb/j8xWZcvlv04/Dk17NStfIy3HJiFPwv6H5VGMHNCSHQre26+GxIuQ2xA01FxW7Hiu6cXNwTY35XO/wr2Xg3A8PisL3bqJFJNr6MDY3Km9xyI+NdccrfLjnjI8QwMwW1kLux0N7C22l+WnLrWzl60ztJ2Wk4fjBCxLRMGeF9sy63Rr38Q/G9WJAdzuf86641ysQMtRlKntTWFdGUJSmZKnIplquxXdKgZauEVA4qikwqM1YlFQGqGWpEU6lapQ21CnkU21ZobQNOIoW86zWljhfDZMTNHBELvIwVb7C+7N5AXY+QNekYHsZwdgoGFkluGbP9JkDSwg91BNkXwhp5rhE2yAtcWy15jFK6G6OymxF1ZlNiLEXHIjcVKMdONRPKPdtaWTTILJz+rc26crVixNvTMF7PuHvmRsPMuRwDL3k15EiI791hA0RpD3SWBJGZx7tSz+z3hwJ/QSDKpMixSzTf6o5sQYr2Z9bQqLAli5y+CvMBxXF3LfS8RmIALd/NmIF7AnNcgXNhyuetMj4jiVN1xM6mwFxNKDlBJAuG2uSbdSetZ01t13ZvsbAcPPjcbAY0LuIoZJMREI0jY940kiRs/h0QZgLlWJrhpijOxRO7RiSqZi+Qclztq3qfsq0+PxBQo2ImKHdDLIUNzmN0JsbnXbfWqpTz++qm0VqRHKpivP9u9My+Y+2om0dqFqky+Y+2ll9Ptqrt6/GFsS2nT0/OvypuKhcrcEqOpty0/PrSxpw/wCkfNYEEAMQMuuhVgdDtXmXH8Yxc5cQz67ZtvK40ryzt6707GVnHMN6cqpy4Jm1s3x2+dYPA5Zn0ysw3JtfQU3GcakBINwAdvTyqd+HTrW1vEcKd3VBYM2i5r5Sd7X15V6r7N++w47qUa2sDvrYA+LyCgWHlXhUnEZpGuLm23lzFjyNemez/wBoIDCDHrozLaYkDIdB4vKw3/Cu+M08/Jd+Hee0HhgxEAJBJUn1yvbQkbbCvJVuMwI1DEX620/CvVsfxA5nSQKy+4bWKsL+E6nc3v8Ab0rzPj5yTOn6rEfn510w8uOXhUvQJqs01ETV1YTtTDUZlpploHNUEhpzvVZ3q7EUrVATV/h+AMzdFBAJ5a+ddP2cxmFjnMU+EVlayxXijMufNYG775r9bCw31JzlyyXRjq3ThzKOo+dODV7vjuzeG7q5mmwyka2kiRRpzASx9Aa4LivC+FsSkUrzOBdpFRUCrcXZmUBW3sAEuTYXF71i82vMascNemk10uB7FYiYZoVZ1uRpkBHPxFnHXkDVkez/ABROXu5Ebmc0EiX6EiRSD5AE1r9yJj3NxyFA1qcX4BNh3Ks0bFblgjXK218QIFj5a7VlXpuVRo3vQNNqIVKietCopUgKFGogkj4U1koij+H3UPCPLQtUlKiu8xvZwh88zySgbRovg8g2oYjnpa9c5xHs680uZYe5XTS6qosALhdwbCvVMeFA5Ada5rGcaw8QzyZ1QmysoBYnW7WI20rwzPKeHumMy8n8HwgwuHMdwSRqbak+Z/CvOeMpeVr7Xr0pOKYNoC4nzjyWx+JvvXn2MmiLks3hN+l6mFvq3XS4z09Kb4SJYm8Td6bZSDZR186z4pmU+Ik+vKtzEQxWTunzqyXIYWZWuQVIuQRoCD57CtjsXwnDz4hY5Is19NblNeT818mHO1ej1ezjcNdut4biu+wkMvMRhDy8SXUX67r8BXIdpcVmxMpv9Yf9IFem8Y4bg8BEIY2WOIEHxubBywBBY+XXlXj/AB7DSxylnKMJCWDRyK66m+U291gCvhNjrXTi6tefk7iNpqXeVQMtHvq7bctL/fUjNVITVNggHazEheZAvbpfoKlyS9TadXLGwBJ6DU1M/DMV/s8//Jk/w1qT8Pdcow/usVUke+pbT9I3JTfRhoRvrpXXcWx2BCBcS2GkZRZRHGWygC1gwLHkOlc5y7XHWU3HnkcckYuySxG/vZWBA81Njl87j41rcM4nKSqtGMQlwfAMx0N7lMpsdN8o9ap8RfDs98Msir6kOG5lLklhtpa4+NV4VzNqFfXXVYnHXNmNidP5Vcsu7t4OaayrvJ+LGU5pMKzHkZI4yR/WeIH7ap8W4i/dkNAqpuTmUZTspCK4zG508JrJw8UY2iX44pP7kg+6psYCqEhYrW2zyOxvtlzKVzX530qaj5tzyuWrlb/X/ajFxWNJFzSOhDK2W2aN7HZkuubmL5utdPxvtb3ihY5e5UqM2SxdhzUMGvGPRT6mvMuJ6v6ActNL7Hpyqbh7rqLIfNi5+w6fZV3X1fXnjjNVsJNhwSqFmLb31/BfurCdLEg8iR8jatT9JYWuB6CNftsD8KzMQLOw8/hXTjb4M7lld0ylSvQrq9Qg0DSotUQFFI0aFQKiDQpUDiKbenL0+VACiPTMXiTIqrqb725Le2v55VpDDr3dmjVhYeEqCBbbf4Vy2PnmUHugCTltfy2Hzv8AOoMP2hMgkE8yYYx2uj3LsRa9l+sf2V48Y99vsr8f4JJI+dbLcAECwGUbaDeuSxXDWU6tmHUV2nEcdwphpj8QxuBcwMFK6a2y3/8AFY8uAwz6YfFLIb2CsCrHS/O1dZ0z9N62woPDte+/rW/2a40cPiUkGx8J/msRf7hWDOpVyp3G/Op0sI/5XeDKeYAVs32stL8rL7PRfaNxAyYVWte8q26C6ta/Xb7BXm06tGpRt89yOWgsSPW9eoScIkxUEaBSVWzORYsp7mUqQpIDDNYEXG/I2rzDi06ySuy+7mNrbWudjzHQ9LU453tjkykx9KqZKIkplK1d3mPz1u8JkVYvHEroxObQE2B+uOW2m3rXOk1u8L4LiBaSSQYaPcF753H/AMcI8Teug86xn4Y5MblNR0XDSGt9HnEYAJ8bAlb8gzsDb4n1NMn4pi0vfFR/CYH7EzUOHcGM7WiXvWPMwYgC3UmFgDuNTequOwuUlb4dVBILCFnFxfbvA7bi1x91ca8V4st9z8/P4VJOINPfvCrkaAFiCR5PpY+ulOhjZ2CAZmtcJKCCVH6si2uvxUVUW8NxLlyMQVKqDE1tCdNjtqNR927wFgkc06nRI2KjNmTvDZUI5jxvHodbA0MsLLqRaw/B5rZnXDwr1K3+RlYj7TWrh+AxyQFops3jys0axjS3iSwQWJBuOvI71o4n2frOqTwYmwkUFfpT3MjlQT3b2vlGtiQSbdNay+H4bF4CQtJE7YdvBIyAtGwB0dHGl1OoPPUczWrMjk/RZXC3HL6vb4+3z391fF+zzaTucVICL3inwwBG4IBBO3Ss5OzGKQaJOhtcrJEyNt9WZgEYeVwf5Nei/wCkZoFCw9ywdro0jsqAsM2mQEsG3tpqT1rIxQx0hL4zEI8agnuI86RueQkGVQYxuQSSQLc71LrXVaw/UcHJxS5/TfGveWeY88kwjAm8bXB17xiPmPCKpcWADggg3UXtsCLj8BW92nxPeIZHLb/o9bEk6sxA69K5IV0441+nx39R96WamXpFq6vZpJmohqhzUWaomkjPQMnp8qjzUzNUNJu8Pl8qHeelQ5qGahpYD/m1EtfY2qAtpTM1E1t6Rw2Vbi9beL4ThJHSYrH3ig++AVccwfPXTTeuZw6k6XsRpepOKTTqnh5cutePG6fR/lJj+y+AmZmW8LanKvu/Pb52rkOK8FhjOXOXP8kAD53qrLxXEA6mx15bXqA4l2N2N67Ta3kws8JCqqPCKl4VF3kqg7A3PoNTUMcLMCRy++ug7McP8SLpmdwAPQ6k+Q1NZyrn4Xe1HGpoZFSMlc2HkU6nVZjlPrYR6dDXF5a7z2vQKmNiRRouEgHyaTU+dcQBXowx1Hlyy3UWShkqa1BhWtMt/gUqYbu5e6SQmxOb3gNzkb6h1HiGotXosPCOH46PPHGCWIzOM3fxydJiSS9/U/iPOsLx2EKFaBTbmbMeXO1+Q51q8H7Q4aN8yL3RZSpIZwCpBuGHeZT8RXDV34cP3/TO8b/Z1fHeJSTIMJg0CLGe7klDWjQKCndRyD3hl3tcnYDeuV4zwl1CxIwmfQZEVs/hTU5NSBpzsedulXina9rZYBYDQHaw6KBaw9APjWDHxaVGzqbN156726VfTle3G3n5LMvTqTvV837/AAuFGRXWTRdmRhzHkdm5davMFTAxLH7rzEyWNwpVM6ofXvSf+D5VzuNxskrZnYk9SelaHZ7HKpaKW/dSDK9veABurqP10PiHXUc6XCybdpjluZ5/8etez7EY2aC+IfNhMqwwwZVzTNEoXKjWuEATxMTb3trGo+1nbOUL9EgzLM7ZJSGXLH9VYocjEAWtdt/Q6DKg7QYjC4CPBQqe9UyhpwLIIpZDIpilOnjDKwN9rc6w+C4cCZDI6Xvtck5jtdrZft3tS5TXTpycmPHjcr7LXaBvFFAiuwjQMclgbkZVuSCBoD86y5FktpH8GlQX9fEKqY+VppXkyqwZjlzSqvhGi6d4pGgqSGMkXIiUdRIWI8xYkH51mfD4uOGsZvz5v3vd92d2ixjuEzWGp0UAAWHlz1rGzVNxTF94+nujRfxPxqmTXWdR9nhw9OEiQtQzUzNQvVdUgagWqMtQzUEmakzVHekDRDs1IGmUiagdmpXplK9B6GWIP53/AD99CPjgFwwG1X8dhVOgNrj862rguMqyPlP5+NeSR7rdNTH4+JzdgD5WrEldb2UfKqZam5j6V2kcvU05cYqKFU3P1rbDyB61qdjcWWxasx12XoPIVzUcdzWz2enWKZWY2C6npp1qzFMsunae13CO2LWYC6fR4QSPqnxbjkPOuCC12nBePyYziLzm/cJbwnUZVGWNLdWILEdM1buN7O8MnzMVaBydDEwA+MRBW3pb1rWXNjhlMaxOO2beX5aaRXVcd7E4jDoZUZZ4xqSgIdR1ZDfTzBNcmziussvcY0BFChnoA66VTRwpNU4wE/8A7M3/ACpP8NQzoymzqynoylT8jrURGaIPMUxmG9XxwfF5c/0XEZLXzdxLlt1zZbWoaSNxh7AAAWFrnX5DlVOXGSNu59BoPkKrhxQv+fPpU1GJwcePciQyt+sfmajLHrV2Xg2LVM7YbEKlr5jBKFt1zFbVn3qN+mCTQvQoE0Dr0qZSvUBpU29C9A+hTb0L0El6FNvQJoh9CmXpXoPWcVILX6bj9lef8YxAeQ2HOuvxOKGUg7f5VzpwsbOdCfury4dPbndshcGxFxb4mq0iEbiuqkUIugArHxyoo8Wp6fnau0rlVKIgC5o4LCSYmTImgGrMdlX9Zv2c61eBdnHntJMTHDuLe8/kgPL+Ufheu9wPCoVUKI1SMbKN282O5PmamXJ6fpx7qzHfd6jN4XhookEaHKi66g3kY7lm2BP3aCrCTF3uSQB5/KruKwqe6oy36bConwuUALy5jf4ivL+1nLbfN95f8N3kxupPDQwnFHU31/CsrtZwOLFr3sIRJxuPdEo87bN/K+B8gEYbfs+YpjzED77fitdOPLLH+WMpK4jifA8ThxmkTw7ZgQy36Ejb41V4dOEmidtFWWNmO9lV1Ymw1OgNegpMWBVrMrAgg6gg7jWsHH9lEa5gbKf1H1HoG3HxvXow5fV5c8sdPobsz2uwPEO8+iSmTu8ue8ciWz5svvqL+423SvDfbmf4Vb+gh/v11f7nrDPG2PV1KsPo2h/4+oPMedcn7dT/AAs39BD/AH62w6r2FdkYXjOPmQO+dkgDC4QJo0gB+sWuAeQXTc13374HDPpn0Lv/ANPn7u2Vsne7d33lsua+lr76b6VmexH+J4P58/8A35K8PB/hz/7X/wDZQei+3fsjCkY4hCgR86pOFFg4fRZCB9YNYE8w2u1X/Yd2QhTDLj5UDTSlu6LC/dRKSoK32ZiCb9CB1vt+2/8Aief+fB/3460fZX/FGD/oR/1Ggk4f2/4ZPizg45802ZlAyMEZkvmVXIykix9baXry727dkIcOY8bAgQSuY5lUWUyEF1kAGxOVgepsdyb8V7PD/DGF/wB6P9+vYv3QP8Vr/vMX3PQfO16F6aTQvQOJoXpt6VEOJoXoXoXoDejem3oXoHUr029DNQOvSppNC9QdrgMYHh8fvKcrfgfiLUUyi52FW+LcBuxeA5SdTGTYX38J2/qn4Vzsiv3gSdmQDQ+C5H9W4vXLGTLvG9PRcteU2KxLSOEhBJOgIFyfT9tbXB+zyIQ0tpZN8u6L/O/XP2etX+F4CKNbxXAYaudWYdB0Hl99aIcKLDT8fWpu5dY9T5TcnlPGADcm7deQ9KUuIqm89V2mzG1bxxmM1GMsrfK/DNz608vVES8qDS1plakcH861RlOuvwP7aDTVC8tZyxlamWk5k+f3+lX+z2GXEYmKBmKiRiMwtcWUnn6VhvJ+elHD46SJ1kiYpImqsLb2IuLi17E1y13+drt732Y7Mx4LvCkjv3mS+fLpkzWtlA/WNcx7QfZrhsdJJjHmmR1hsFTJlPdqxG6k8688/wDW/Ff9sk/sx/4KbL224owIOLcggggrHqDoRold5WLHY/uf+0UcmEbBMwE0Lu6qd2ikOYsBzs7MD0uvWtb96bB/6Q+nd5L/AK7v+50yd7mz3zb5c+uX4baV4NxISI64iBikiG+aNirLYaMCNR0rS/fR43lyfTWt17uLP/byX+NVHqP7oDtFEmEXBBgZZnR2UHVIozmzN0uwUDrZulaPsM7Qxz8PXD5h3uGujLzMZYmNwOYscvqp8q+csVipJXaSV2kdjdnclmY9STqadgcfNA4lhkeKRdnRirD4jl5UH0hwX2TYPDY/6asspyu0kcRy5UZs31gLlRm0HkLk1zP7oftDF3cOBRryd4JpAPqKqsEVuhJa9ui+YrzyX2pcbZMhxrW2uscSt/bCX+NclNMzsWdizMSWZiSzE7kk6k0AJoXpt6F6ocTQvQvQvQOvSvTb0r0QaV6aTSvUUb0L0r0L0BvSpCjRHrzSj1qN3U2JAuNjYaelUzPUbTVNNrkmJtVd8X0U1WeaozOOtESviDzFCOW1zUDSVEX6UFlcSd6DYomqTSW15c/KgZKC0Z6Bnqk0lRtLQXjNULSf5VUaamd7U1KbbXBcJ9JxEUGbL3sipmtfLm52uL/OtPG8AgMcz4XFidsOM0sbQPEwQNlZ0LEhwptf/wAXzuwkn8I4T+nj++reP7S4ZTPDBhBhxM5jnmM7zSGHvbyKgYARg2ubX6cgaqMAhspfKxUGxYA5QehbYHyrIxODgELOJG77v8giEZy92UzZ+92zX0y716zj+IcVTiqYfDrJ9F7yNIokjvhXwjZbk6ZWUpmJYm4udayMSIRAVhN4V7RosdtggjOXKeYtoDzFUeWvC4XMUYLmK5ipC5hqVvtfyq7iuCzx4aLEsB3crSKu+Yd1kuWFrAHvBbXWvTk7QYqfi/EMFNIXwrLj4+5I/RgRLIyMq/VfMoJYakkmsPEdoMWvDeEnPLODip80LO7CcQS4ZoYmXXMARYCxtfSg8/mgdApZGUMLqWUgMOq33HpUV69A9o8kuJgTHLiMQ+HkxMi/R8TfPhpyuZkivo0VtBltawBF7159VCvSvQpVAqVKlQKlSpUCpUqVAqVKkKA0qVKg70y01pqqmWomlqKtNKaoY/iBSwUBmPI9P2mk8x5a1mmOS5Y+8dtRp5/hVg1knuND62NwDzFIznnWTh1ZLWAN/eN/sHpVhpaC08vOmCaqjS0wyVBcaWmNLVQy1G0lBaaWm99VUtSvVRcgxrxsHjZkdTdWUkMpGxBGoNRPMSSSbkkkk7knUkmoaNBpR9oMasXcLiZ1htbuxK4S3NcoOi+W1U48ZKqhFkcIJBKFDEKJVGVZAo0DgaZt6hoUFgY+YSNKJZBI2fNIHYSNnBD3e9ze5v1vVJ8XOojUSyBYmLxAO1o2JBLRi/ha6qbjoKlprIDoaB3FuOYvFZTicRLNl93vHZst97AnS9hWfTnQg2NNoFSpUqBUqVKgVKlSoFSpWo2oBRpUqAUaVKg6IzVGZaiamUEplqMy1G1MNBIZKYXpopNQEmm0aBoBegTSahRSo3oUhRD70QaaKIoDelQNGgFGmijQJluLGqJFXW90+lUmqQClSpVQqVKlQKlSpUCpUqVAaFKkaA0qVGg//9k=" alt="100 FC Mobile Points">
+    <p>🏆 First Prize: <strong>100 FC Mobile Points</strong></p>
+  </div>
+</section>
+
+    
+</body>
+    <footer class="tournament-footer">
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h3>Laliga FC Elite Tournaments</h3>
+            <p>Competitive • Fair • Community Driven</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="./tournamentrules.html">Tournament Rules</a>
+            <a href="./tandc.html">Terms & Conditions</a>
+            <a href="./register.html">Contact</a>
+        </div>
+
+        <div class="footer-contact">
+            <p>📱 WhatsApp: +233 554 890 113</p>
+            <p>📱 WhatsApp: +233 556 434 005</p>
+            <p>📧 Email: hamzaabdulrahman212@gmail.com</p>
+        </div>
+
+        <div class="footer-social">
+            <p>Follow Us</p>
+            <div>
+                <a href="#">TikTok</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+
+         <!-- Dynamic Sponsors -->
+        <div class="footer-sponsors">
+            <p> Sponsors</p>
+              <p>  ⚠️ Disclaimer: These sponsors are not official partners of the LaLiga FC Elite League.</p>
+            <div class="sponsor-logos" id="sponsor-logos">
+                <!-- JS injects sponsor logos -->
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Laliga FC Elite Tournaments. All Rights Reserved.</p>
+        <p>Independent Community Tournament</p>
+    </div>
+</footer>
+
+
+<script>
+/* Registered players */
+const playersList=document.getElementById('playersList');
+const players=JSON.parse(localStorage.getItem('players'))||[];
+playersList.innerHTML='';
+if(players.length===0) playersList.innerHTML="<li>No players registered yet.</li>";
+else players.forEach(p=>{const li=document.createElement('li'); li.innerText=p; playersList.appendChild(li);});
+
+/* Fixtures */
+const fixturesContainer=document.getElementById('fixturesContainer');
+const fixtures=JSON.parse(localStorage.getItem('fixtures'))||[];
+if(fixtures.length===0) fixturesContainer.innerHTML="<p>No fixtures scheduled.</p>";
+else{
+  const grouped={};
+  fixtures.forEach(f=>{if(!grouped[f.matchday]) grouped[f.matchday]=[]; grouped[f.matchday].push(f);});
+  Object.keys(grouped).sort((a,b)=>a-b).forEach(day=>{
+    const dayDiv=document.createElement('div'); dayDiv.classList.add('matchday');
+    const heading=document.createElement('h3'); heading.innerText=`Matchday ${day}`; dayDiv.appendChild(heading);
+    grouped[day].forEach(f=>{
+      const fixtureDiv=document.createElement('div'); fixtureDiv.classList.add('fixture');
+      fixtureDiv.innerText=`${f.firstPlayer} vs ${f.secondPlayer} — ${f.date} ${f.time}`;
+      dayDiv.appendChild(fixtureDiv);
+    });
+    fixturesContainer.appendChild(dayDiv);
+  });
+}
+
+/* League Table */
+const leagueTableBody=document.getElementById('leagueTableBody');
+let league=JSON.parse(localStorage.getItem('league'))||{};
+leagueTableBody.innerHTML='';
+const rows=Object.entries(league).sort((a,b)=>{
+  if(b[1].PTS!==a[1].PTS) return b[1].PTS-a[1].PTS;
+  if(b[1].GD!==a[1].GD) return b[1].GD-a[1].GD;
+  return b[1].GF-a[1].GF;
+});
+rows.forEach(([player,st],idx)=>{
+  const r=leagueTableBody.insertRow();
+  r.insertCell(0).innerText=idx+1;
+  r.insertCell(1).innerText=player;
+  r.insertCell(2).innerText=st.GP;
+  r.insertCell(3).innerText=st.W;
+  r.insertCell(4).innerText=st.D;
+  r.insertCell(5).innerText=st.L;
+  r.insertCell(6).innerText=st.GF;
+  r.insertCell(7).innerText=st.GA;
+  r.insertCell(8).innerText=st.GD;
+  r.insertCell(9).innerText=st.PTS;
+});
+
+
+const heroSection = document.getElementById('heroSection');
+
+let heroImages = [];
+let heroIndex = 0;
+
+/* Load Hero Backgrounds */
+window.addEventListener('DOMContentLoaded', () => {
+
+    const savedBg = localStorage.getItem('heroBackgrounds');
+
+    if (!savedBg) return;
+
+    heroImages = savedBg.split(',');
+
+    if (heroImages.length === 0) return;
+
+    startHeroSlideshow();
+});
+
+function startHeroSlideshow() {
+
+    updateHeroBackground();
+
+    setInterval(() => {
+        heroIndex++;
+        if (heroIndex >= heroImages.length) heroIndex = 0;
+
+        updateHeroBackground();
+
+    }, 3000);   // Change every 3.5 seconds
+}
+
+function updateHeroBackground() {
+    const img = heroImages[heroIndex].trim();
+    heroSection.style.backgroundImage = `url('${img}')`;
+}
+  // ✅ Load sponsors from localStorage
+    function getSponsors() {
+        const stored = localStorage.getItem("sponsors");
+        if(stored) return JSON.parse(stored);
+        // Default sponsors if none stored
+        return [
+            { name: "Sponsor 1", src: "https://via.placeholder.com/80x28?text=SP1" },
+            { name: "Sponsor 2", src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRytvL-bVh9H3NIcdYjFtfzNcm3JnfATAbt4wWHMw95&s" }
+        ];
+    }
+
+    function renderSponsors() {
+        const sponsors = getSponsors();
+        const container = document.getElementById("sponsor-logos");
+        container.innerHTML = "";
+        sponsors.forEach(sponsor => {
+            const img = document.createElement("img");
+            img.src = sponsor.src;
+            img.alt = sponsor.name;
+            img.title = sponsor.name;
+            container.appendChild(img);
+        });
+    }
+
+    renderSponsors();
+</script>
+</body>
+</html>
